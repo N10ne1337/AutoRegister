@@ -90,4 +90,4 @@ except Exception as e:
 
 finally:
     # Закрытие браузера
-    driver.quit()д
+    driver.quit()
