@@ -2,6 +2,8 @@ from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 import time
 import random
 
@@ -38,11 +40,19 @@ try:
     # Ввод email
     email_field = driver.find_element(By.CSS_SELECTOR, "input[type='email']")  # Поиск поля email по типу
     email_field.send_keys(email)
-    email_field.send_keys(Keys.RETURN)
+    time.sleep(1)
+
+    # Поиск и нажатие кнопки "Зарегистрировать/Войти"
+    login_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))  # Поиск кнопки по типу
+    )
+    login_button.click()
     time.sleep(2)
 
     # Ввод кода авторизации
-    code_field = driver.find_element(By.CSS_SELECTOR, "input[type='text']")  # Поиск поля кода по типу
+    code_field = WebDriverWait(driver, 10).until(
+        EC.presence_of_element_located((By.CSS_SELECTOR, "input[type='text']"))  # Поиск поля кода по типу
+    )
     code_field.send_keys(auth_code)
     code_field.send_keys(Keys.RETURN)
     time.sleep(2)
@@ -80,4 +90,4 @@ except Exception as e:
 
 finally:
     # Закрытие браузера
-    driver.quit()
+    driver.quit()д
