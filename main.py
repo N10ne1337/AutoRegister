@@ -42,11 +42,11 @@ try:
     email_field.send_keys(email)
     time.sleep(1)
 
-    # Поиск и нажатие кнопки "Зарегистрировать/Войти"
-    login_button = WebDriverWait(driver, 10).until(
-        EC.element_to_be_clickable((By.CSS_SELECTOR, "button[type='submit']"))  # Поиск кнопки по типу
+    # Поиск и нажатие кнопки "Continue"
+    continue_button = WebDriverWait(driver, 10).until(
+        EC.element_to_be_clickable((By.XPATH, "//button[contains(text(), 'Continue')]"))  # Поиск кнопки по тексту
     )
-    login_button.click()
+    continue_button.click()
     time.sleep(2)
 
     # Ввод кода авторизации
